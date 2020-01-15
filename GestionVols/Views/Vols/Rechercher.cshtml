@@ -1,0 +1,58 @@
+﻿@using System.Collections.Generic;
+@{
+    ViewBag.Title = "Rechercher";
+}
+
+@using GridMvc.Html
+
+@model IEnumerable<GestionVols.Models.VolPlannifie>
+
+<div class="container mb-5">
+
+    <div class="row">
+        <div class="col">
+            <h2 class="title">Resultat(s) vol(s) recherché(s)</h2>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+
+@* Liste Vols Départ *@
+<div class="container">
+
+    <div class="row">
+
+        <div class="col">
+
+
+
+
+
+
+
+            @Html.Grid(Model).Columns(columns =>
+       {
+
+
+
+       columns.Add(v => v.HEUREPREVUE).Titled("Heure Prévue").SetWidth("10%");
+       columns.Add(v => v.HEUREREVISE).Titled("Heure Révisé").Sortable(true);
+                columns.Add(v => v.NUMERO).Titled("Num Vol").Sortable(true);
+                columns.Add(v => v.PROVENANCE).Titled("DEPART DE").Sortable(true);
+                columns.Add(v => v.DESTINATION).Titled("VERS").Sortable(true);
+                columns.Add(v => v.COMPAGNIE).Titled("Compagnie aérienne").Sortable(true);
+                columns.Add(v => v.STATUT).Titled("Statut").Sortable(true);
+                columns.Add()
+                    .Sanitized(false)
+                    .Titled("Suivre")
+                    .Encoded(false)
+                    .RenderValueAs(v => Html.ActionLink("Suivre", "Inscription", new { id = v.NUMERO }));
+            }).WithPaging(10).Sortable(true).
+        </div>
+
+    </div>
+

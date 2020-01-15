@@ -1,0 +1,162 @@
+﻿
+@using GestionVols.Controllers.Class.ControllerObjects
+@using GestionVols.Controllers
+
+@model DAL.Notification
+@{
+    ViewBag.Title = "Index";
+    var _APP = (ViewContext.Controller as InscriptionController)._APP;
+    List<string> _MessageList = (TempData["NotificationMessage"] as List<string>);
+    DAL.Notification _PreviousNotification = (TempData["PreviousNotification"] as DAL.Notification);
+}
+
+<div>
+    <img id="bigHeaderImage" src="~/Content/img/header-vol.jpg">
+</div>
+<br>
+<div id="inscriptionText">
+    <span>
+        Trouvez un vol à destination de Paris et suivez les informations en direct des avions qui atterrissent à l'aeroport AIBD : horaires, suivi en temps réel, statut, retards...
+        Retrouvez tous les vols à l'arrivée à l'aeroport AIBD, quelle que soit leur provenance.
+
+    </span>
+</div>
+<br>
+<div class="thinContainer">
+    <div id="notificationGrid">
+        @{
+            new HtmlString("<h1>" + DateTime.Now.ToString() + "</h1>");
+        }
+        <div id="notificationForm">
+            @using (Html.BeginForm("Subscribe", "Inscription", FormMethod.Post))
+            {
+                <div id="inputGrid">
+                    <div id="input-PhoneItem-digits">
+                        @Html.TextBoxFor(model => model.Num_Phone, new
+                        {
+                            @class = "form-control",
+                            @placeHolder = "(000)-000-0000",
+                            @type = "tel",
+                            @maxlength = "14",
+                            @Value = (_PreviousNotification != null) ? _PreviousNotification.Num_Phone : ""
+                        })
+                    </div>
+                    <div id="input-FlightItem">
+                        @Html.TextBoxFor(model => model.Num_Vol, new
+                        {
+                            @class = "form-control",
+                            @placeHolder = "(NumVol)",
+                            @Value = (_PreviousNotification != null) ? _PreviousNotification.Num_Vol : @ViewBag.DefaultNumVol
+                        })
+                    </div>
+                    <div id="input-LanguageItem">
+                        @{
+                            var selectListLanguage = _APP.config.Language.ToList().Select(x => new SelectListItem() { Text = x, Value = x, Selected = x == ((_PreviousNotification != null) ? _PreviousNotification.Langue : "") });
+                        }
+                        @Html.DropDownListFor(model => model.Langue, selectListLanguage, new { @class = "form-control" })
+                    </div>
+                    <div id="input-ButtonItem">
+                        <button type="submit" class="btn btn-dark"><span>M'inscrire</span></button>
+                    </div>
+                    <div id="input-TermsItem">
+                        <a href=""><span>Termes et conditions</span></a>
+                    </div>
+                </div>
+            }
+        </div>
+        <div id="notificationForm-Info" style="display:@((ViewBag.RegisterResult != null)?"normal":"none")">
+            <img id="notificationForm-Info-img" src="~/Content/img/@((ViewBag.RegisterResult != null && ViewBag.RegisterResult)?"checkmark-64.png":"x-mark-2-64.png")">
+
+            <ul id="notificationForm-Info-message">
+                @{
+                    if (_MessageList != null)
+                    {
+                        foreach (string message in _MessageList)
+                        {
+                            <li>@message</li>
+                        }
+                    }
+                }
+
+            </ul>
+        </div>
+    </div>
+    <hr id="containerSeparator">
+    <div>
+        <h4>Foire aux questions</h4>
+
+        <div id="questionBag">
+            <div class="card">
+                <div class="thinHeader card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" href="#collapseOne"
+                                aria-controls="collapseOne">
+                            Cherchez votre vol dans les pages vols au départ ou vols à l'arrivée
+
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapseOne" class="collapse" hreft="#questionBag" aria-labelledby="headingOne">
+                    <div class="card-body">
+                        Cliquez sur le lien "suivre" dans la fiche de votre vol
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="thinHeader card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" href="#collapseTwo"
+                                aria-controls="collapseTwo">
+                            Votre alerte est enregistréee et vous recevez un sms de confirmation
+
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapseTwo" class="collapse" hreft="#questionBag" aria-labelledby="headingTwo">
+                    <div class="card-body">
+                        Vous pouvez modifier vos alertes à tout moment, en envoyamt un sms ARRET NOTIFICATION.
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="thinContainer infoHide" id="tuilioInfo">
+    <div id="tuilioInfo-inner">
+
+        <h4>Notre Messagerie</h4>
+
+        <p>
+            Mon Vol en Direct permet de recevoir une alerte par sms pour toute confirmation ou modification d'un vol (à l'heure, retard, report, annulation, changement de terminal).
+            Gratuit, ce service est accessible à tous, passagers comme accompagnants...
+
+        </p>
+    </div>
+</div>
+
+
+<div class="infoSupp">
+    <div class="infoSupp-inner">
+        <div id="infoItem1">
+            <img id="infoImg" src="~/Content/img/phoneApp.jpeg">
+        </div>
+        <div id="infoItem2">
+            <h3>Vous avec une question?</h3>
+            <br>
+            <h3>Contactez-nous</h3>
+            ...
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function updateExtension(_value) {
+
+    }
+</script>

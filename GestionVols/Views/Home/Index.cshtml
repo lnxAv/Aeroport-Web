@@ -1,0 +1,93 @@
+﻿@using GestionVols.Models
+
+@using GridMvc.Html
+
+@model GestionVols.Models.Search
+
+<div class=" container section-1">
+    <div class="row">
+        <div class="col-md-5">
+
+        </div>
+
+        <div class="col-md-7 col-md-offset-9">
+
+            <div class=" mt-5 offset-md-3">
+
+                <label class="flightSearch-input-label"><h4>Trouver votre vol</h4></label>
+
+            </div>
+
+
+            @using (Html.BeginForm(actionName: "Search", controllerName: "Vols", method: FormMethod.Get, htmlAttributes: new { @class = "form-horizontal" }))
+            {
+
+
+                <div class="form-group form-inline offset-md-3">
+                    
+
+                    @Html.TextBoxFor(model => model.Valeur, "Rechercher", new { @class = "form-control flightSearch-input", placeholder = Html.DisplayName("Rechercher un vol"), required = "required" })
+
+                    
+
+
+                <button class="btn btn-secondary" type="submit">
+                    <i class="fa fa-search"></i>
+                </button>
+
+                </div>
+            }
+
+
+
+
+
+
+
+
+
+            <div class="mt-5">
+                <a class="btn btn-dark findFlight-btn mr-2" href="@Url.Action("ListeVolsArrive", "Vols")">
+                    <img class="findFlight-btn-img" src="~/Content/img/ico_arr.png">
+                    <span class="textHide">Arrivée</span>
+                </a>
+                <a class="btn btn-dark findFlight-btn mr-2" href="@Url.Action("ListeVolsDepart", "Vols")">
+                    <img class="findFlight-btn-img" src="~/Content/img/ico_dep.png">
+                    <span class="textHide">Depart</span>
+                </a>
+                <a class="btn btn-dark findFlight-btn" href="@Url.Action("Index", "Vols")">
+                    <img class="findFlight-btn-img" src="~/Content/img/ico_tous.png">
+                    <span class="textHide">Tous les vols</span>
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="followFlight">
+    <div class="followFlight-inner">
+        <span><h4>Suivre un vol</h4></span>
+        <p class="textHide">
+            Trouvez un vol à destination de Paris et suivez les informations en direct des avions qui atterrissent à l'aeroport AIBD : horaires, suivi en temps réel, statut, retards...
+            Retrouvez tous les vols à l'arrivée à l'aeroport de Montreal, quelle que soit leur provenance.
+        </p>
+        <a href="@Url.Action("Index", "Inscription")" class="btn btn-light"> Suivre un vol</a>
+    </div>
+</div>
+
+
+<div class="infoSupp">
+    <div class="infoSupp-inner">
+        <div id="infoItem1">
+            <img id="infoImg" src="~/Content/img/phoneApp.jpeg">
+        </div>
+        <div id="infoItem2">
+            <span><h3>Vous avec une question?</h3></span>
+            <br>
+            <h3>Contactez-nous</h3>
+            ...
+        </div>
+    </div>
+</div>

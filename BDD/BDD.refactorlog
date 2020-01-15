@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="98c75bc8-a9a9-460c-b89e-c818655292d0" ChangeDateTime="11/28/2019 03:47:04">
+    <Property Name="ElementName" Value="[dbo].[Admins].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Admins]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id_Admin" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6400a975-6360-44fb-9bbb-c17b13343ba5" ChangeDateTime="11/28/2019 12:56:38">
+    <Property Name="ElementName" Value="[dbo].[Vols].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Vols]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id_Ville" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ca6c1d17-f3bf-49dd-9267-18b13f76dc55" ChangeDateTime="11/28/2019 13:03:01">
+    <Property Name="ElementName" Value="[dbo].[Vols].[Id_Ville]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Vols]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="numero" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="721f8bde-6cda-4513-b87e-4dfaacbd0ef1" ChangeDateTime="11/28/2019 13:04:11">
+    <Property Name="ElementName" Value="[dbo].[Vols].[Nom]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Vols]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Heure_Depart" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a8390783-32f3-447c-a79b-e330a799799b" ChangeDateTime="11/28/2019 13:04:49">
+    <Property Name="ElementName" Value="[dbo].[Vols].[numero]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Vols]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Numero" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="586581bd-8920-4b75-89c5-e8506dbaaacc" ChangeDateTime="11/28/2019 13:24:31">
+    <Property Name="ElementName" Value="[dbo].[Villes].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Villes]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id_Ville" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="5410ace5-d1fd-49a6-8473-9cd08433fff7" ChangeDateTime="11/28/2019 13:30:03">
+    <Property Name="ElementName" Value="[dbo].[Administration].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Administration]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Code_IATA" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e9e9e35d-5900-4ad3-8df1-7370b0828b6c" ChangeDateTime="11/28/2019 13:40:01">
+    <Property Name="ElementName" Value="[dbo].[Aeroport].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Aeroport]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Code_IATA" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="91fbed88-dff5-4ab2-ab1e-2b37d647f944" ChangeDateTime="11/28/2019 14:07:31">
+    <Property Name="ElementName" Value="[dbo].[CompagniesAeriennes].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CompagniesAeriennes]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Code_IATA" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="29092c60-a347-4f03-bea7-d3c47130b586" ChangeDateTime="11/28/2019 14:48:51">
+    <Property Name="ElementName" Value="[dbo].[VolsCedules].[Code_IATA]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[VolsCedules]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Numero_Vol" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="1b9fc1eb-06db-4443-8adb-b5ca9b2c49fc" ChangeDateTime="11/28/2019 15:17:51">
+    <Property Name="ElementName" Value="[dbo].[Notifications].[Satut]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Notifications]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Statut" />
+  </Operation>
+</Operations>

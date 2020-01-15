@@ -1,0 +1,42 @@
+﻿
+@using GestionVols.Controllers.Class.ControllerObjects
+@{
+    ServerTimer _TIMER = @ApplicationInstance.Application["ServerTimer"] as ServerTimer;
+
+    ViewBag.Title = "DashBoard";
+
+    if (Session["Id_Admin"] == null)
+        Response.Redirect("~/Login/Index");
+
+    //Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>DashBoard</h2>
+<p>bienvenue ruskov</p>
+
+<script type="text/javascript">
+    function loadPartialView()  {
+            $.ajax({
+            url: '@Url.Action("ViewTimer", "Server")',
+            type: 'post',
+            cache: false,
+            async: true,
+            success: function(data){
+            $('#TimerView').html(data);
+            }
+            });
+    }
+
+    function INIT() {
+        loadPartialView();
+        window.setInterval("loadPartialView()", 1000);
+    }
+
+
+    INIT()
+</script>
+
+<div id="TimerView">
+    T E M P
+</div>
+

@@ -1,0 +1,34 @@
+﻿@using GestionVols.Controllers.Class.ControllerObjects
+@{
+    ServerTimer _TIMER = @ApplicationInstance.Application["ServerTimer"] as ServerTimer;
+}
+
+
+<script type="text/javascript">
+    function loadPartialView() {
+             $.ajax({
+            url: '@Url.Action("ViewTimer", "Server")',
+            type: 'post',
+            cache: false,
+            async: true,
+            success: function (data) {
+                    $('#TimerView').html(data);
+            }
+            });
+        }
+    }
+
+    function INIT() {
+        loadPartialView();
+        window.setInterval("loadPartialView()", 1000);
+    }
+
+
+    INIT()
+</script>
+
+<hr />
+<div id="TimerView">
+    T E M P
+</div>
+<hr />

@@ -1,0 +1,60 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+a:hover {
+    color: #283C55 !important;
+    font-weight: 500;
+    text-decoration: none !important;
+    transition: all 0.2s ease;
+}
+
+/* Header Menu*/
+li.text-muted a {
+    color: #6c757d !important;
+}
+
+nav.navbar.navbar-expand-lg.navbar-light {
+    padding: 0;
+}
+
+/*Content*/
+.title {
+    color: #283C55;
+}
+
+.container-fluid.section {
+    background: #283C55;
+    color: #fff;
+}
+
+.container-fluid.section a {
+    color: #fff;
+}
+
+.nav-link.active {
+    color: rebeccapurple !important;
+}
+
+
+.grid-header-title a:hover {
+    cursor: initial;
+    font-weight: 700;
+    color: #0056b3 !important;
+}
+

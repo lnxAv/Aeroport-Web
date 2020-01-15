@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Connexion</h2>
+@model GestionVols.Models.Admin
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    
+    <style>
+        #login-div {
+            position: absolute;
+            left: 40%;
+            top: 40%;
+            border: 1px solid #ccc;
+            padding: 10px 10px;
+        }
+
+        .field-validation-error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="login-div">
+        @using (Html.BeginForm("Autorise", "Login", FormMethod.Post))
+        {
+            <table>
+                <tr>
+                    <td></td>
+                    <td style="text-decoration:underline">Login</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(model => model.NomUtilisateur)</td>
+                    <td>@Html.EditorFor(model => model.NomUtilisateur) </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>@Html.ValidationMessageFor(model => model.NomUtilisateur)</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(model => model.MotPasse)</td>
+                    <td>@Html.EditorFor(model => model.MotPasse) </td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td>@Html.ValidationMessageFor(model => model.MotPasse)</td>
+                </tr>
+                <tr>
+                    <td colspan="2"></td>
+                    <td><label class="field-validation-error">@Html.DisplayFor(model => model.LoginErrorMessage)</label></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" value="Login" />
+                        <input type="reset" value="Logout" />
+                    </td>
+                </tr>
+
+            </table>
+            
+        }
+        <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+        <script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="malcom007_aeroportModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Administration">
+          <Key>
+            <PropertyRef Name="Code_IATA" />
+          </Key>
+          <Property Name="Code_IATA" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Couleur" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Logo" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Admins">
+          <Key>
+            <PropertyRef Name="Id_Admin" />
+          </Key>
+          <Property Name="Id_Admin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NomUtilisateur" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MotPasse" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Autorise" Type="bit" Nullable="false" />
+          <Property Name="Code_Aeroport" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Aeroport">
+          <Key>
+            <PropertyRef Name="Code_IATA" />
+          </Key>
+          <Property Name="Code_IATA" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Code_OACI" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id_Ville" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Calendrier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompagniesAeriennes">
+          <Key>
+            <PropertyRef Name="Code_IATA" />
+          </Key>
+          <Property Name="Code_IATA" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Code_OACI" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="Logo" Type="image" />
+          <Property Name="Num_Phone" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Notifications">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Num_Phone" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Num_Vol" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Date_Notification" Type="datetime" Nullable="false" />
+          <Property Name="Statut" Type="bit" Nullable="false" />
+          <Property Name="Langue" Type="varchar" MaxLength="30" />
+          <Property Name="Id_Date_Depart" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Villes">
+          <Key>
+            <PropertyRef Name="Id_Ville" />
+          </Key>
+          <Property Name="Id_Ville" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="70" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vols">
+          <Key>
+            <PropertyRef Name="Numero" />
+            <PropertyRef Name="Id_Date_Depart" />
+          </Key>
+          <Property Name="Numero" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Heure_Depart" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Heure_Arrivee" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Id_Date_Depart" Type="int" Nullable="false" />
+          <Property Name="Id_Date_Arrivee" Type="int" Nullable="false" />
+          <Property Name="Code_CompAerien" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Code_IATA_Aeroport_Depart" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Code_IATA_Aeroport_Arrivee" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VolsCedules">
+          <Key>
+            <PropertyRef Name="Numero_Vol" />
+            <PropertyRef Name="Id_Date_Depart" />
+          </Key>
+          <Property Name="Numero_Vol" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Date_Depart_Revisee" Type="datetime" />
+          <Property Name="Date_Arrivee_Revisee" Type="datetime" />
+          <Property Name="Statut" Type="varchar" MaxLength="15" />
+          <Property Name="Etat" Type="varchar" MaxLength="15" />
+          <Property Name="Date_MAJ" Type="datetime" Nullable="false" />
+          <Property Name="Id_Date_Depart" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'malcom007_aeroport.dbo.Notification' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Num_Phone" />
+            <PropertyRef Name="Num_Vol" />
+            <PropertyRef Name="Statut" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Num_Phone" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Num_Vol" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Statut" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'malcom007_aeroport.dbo.View_1' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="View_1">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Num_Phone" />
+            <PropertyRef Name="Num_Vol" />
+            <PropertyRef Name="Statut" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Num_Phone" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Num_Vol" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Statut" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'malcom007_aeroport.dbo.VOLS_ARRIVES_Today' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="VOLS_ARRIVES_Today">
+          <Key>
+            <PropertyRef Name="NUMERO_VOL" />
+            <PropertyRef Name="PROVENANCE" />
+            <PropertyRef Name="DESTINATION" />
+            <PropertyRef Name="COMPAGNIE" />
+          </Key>
+          <Property Name="NUMERO_VOL" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Etat" Type="varchar" MaxLength="15" />
+          <Property Name="Statut" Type="varchar" MaxLength="15" />
+          <Property Name="PROVENANCE" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="DESTINATION" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="COMPAGNIE" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="DATE_DEPART" Type="datetime" />
+          <Property Name="DATE_DEP_REVISE" Type="datetime" />
+          <Property Name="DATE_ARRIVE" Type="datetime" />
+          <Property Name="DATE_ARR_REVISE" Type="datetime" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'malcom007_aeroport.dbo.VOLS_ARRIVES_Tomorrow' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="VOLS_ARRIVES_Tomorrow">
+          <Key>
+            <PropertyRef Name="NUMERO_VOL" />
+            <PropertyRef Name="PROVENANCE" />
+            <PropertyRef Name="DESTINATION" />
+            <PropertyRef Name="COMPAGNIE" />
+          </Key>
+          <Property Name="NUMERO_VOL" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Etat" Type="varchar" MaxLength="15" />
+          <Property Name="Statut" Type="varchar" MaxLength="15" />
+          <Property Name="PROVENANCE" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="DESTINATION" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="COMPAGNIE" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="DATE_DEPART" Type="datetime" />
+          <Property Name="DATE_DEP_REVISE" Type="datetime" />
+          <Property Name="DATE_ARRIVE" Type="datetime" />
+          <Property Name="DATE_ARR_REVISE" Type="datetime" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'malcom007_aeroport.dbo.VOLS_DEPARTS_Today' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="VOLS_DEPARTS_Today">
+          <Key>
+            <PropertyRef Name="NUMERO_VOL" />
+            <PropertyRef Name="PROVENANCE" />
+            <PropertyRef Name="DESTINATION" />
+            <PropertyRef Name="COMPAGNIE" />
+          </Key>
+          <Property Name="NUMERO_VOL" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Etat" Type="varchar" MaxLength="15" />
+          <Property Name="Statut" Type="varchar" MaxLength="15" />
+          <Property Name="PROVENANCE" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="DESTINATION" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="COMPAGNIE" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="DATE_DEPART" Type="datetime" />
+          <Property Name="DATE_DEP_REVISE" Type="datetime" />
+          <Property Name="DATE_ARRIVE" Type="datetime" />
+          <Property Name="DATE_ARR_REVISE" Type="datetime" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'malcom007_aeroport.dbo.VOLS_DEPARTS_Tomorrow' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="VOLS_DEPARTS_Tomorrow">
+          <Key>
+            <PropertyRef Name="NUMERO_VOL" />
+            <PropertyRef Name="PROVENANCE" />
+            <PropertyRef Name="DESTINATION" />
+            <PropertyRef Name="COMPAGNIE" />
+          </Key>
+          <Property Name="NUMERO_VOL" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Etat" Type="varchar" MaxLength="15" />
+          <Property Name="Statut" Type="varchar" MaxLength="15" />
+          <Property Name="PROVENANCE" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="DESTINATION" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="COMPAGNIE" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="DATE_DEPART" Type="datetime" />
+          <Property Name="DATE_DEP_REVISE" Type="datetime" />
+          <Property Name="DATE_ARRIVE" Type="datetime" />
+          <Property Name="DATE_ARR_REVISE" Type="datetime" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'malcom007_aeroport.dbo.VOLS_RECHERCHES48H' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="VOLS_RECHERCHES48H">
+          <Key>
+            <PropertyRef Name="NUMERO_VOL" />
+            <PropertyRef Name="PROVENANCE" />
+            <PropertyRef Name="DESTINATION" />
+            <PropertyRef Name="COMPAGNIE" />
+          </Key>
+          <Property Name="NUMERO_VOL" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Etat" Type="varchar" MaxLength="15" />
+          <Property Name="Statut" Type="varchar" MaxLength="15" />
+          <Property Name="PROVENANCE" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="DESTINATION" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="COMPAGNIE" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="DATE_DEPART" Type="datetime" />
+          <Property Name="DATE_DEP_REVISE" Type="datetime" />
+          <Property Name="DATE_ARRIVE" Type="datetime" />
+          <Property Name="DATE_ARR_REVISE" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_Administ_Aerop">
+          <End Role="Aeroport" Type="Self.Aeroport" Multiplicity="1" />
+          <End Role="Administration" Type="Self.Administration" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Aeroport">
+              <PropertyRef Name="Code_IATA" />
+            </Principal>
+            <Dependent Role="Administration">
+              <PropertyRef Name="Code_IATA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Admins_Adminstrat">
+          <End Role="Administration" Type="Self.Administration" Multiplicity="1" />
+          <End Role="Admins" Type="Self.Admins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Administration">
+              <PropertyRef Name="Code_IATA" />
+            </Principal>
+            <Dependent Role="Admins">
+              <PropertyRef Name="Code_Aeroport" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Aerop_Ville">
+          <End Role="Villes" Type="Self.Villes" Multiplicity="1" />
+          <End Role="Aeroport" Type="Self.Aeroport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Villes">
+              <PropertyRef Name="Id_Ville" />
+            </Principal>
+            <Dependent Role="Aeroport">
+              <PropertyRef Name="Id_Ville" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vols_Arriv_Calend">
+          <End Role="Calendrier" Type="Self.Calendrier" Multiplicity="1" />
+          <End Role="Vols" Type="Self.Vols" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Calendrier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vols">
+              <PropertyRef Name="Id_Date_Arrivee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vols_Arrivee">
+          <End Role="Aeroport" Type="Self.Aeroport" Multiplicity="1" />
+          <End Role="Vols" Type="Self.Vols" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aeroport">
+              <PropertyRef Name="Code_IATA" />
+            </Principal>
+            <Dependent Role="Vols">
+              <PropertyRef Name="Code_IATA_Aeroport_Arrivee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vols_CompAerien">
+          <End Role="CompagniesAeriennes" Type="Self.CompagniesAeriennes" Multiplicity="1" />
+          <End Role="Vols" Type="Self.Vols" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompagniesAeriennes">
+              <PropertyRef Name="Code_IATA" />
+            </Principal>
+            <Dependent Role="Vols">
+              <PropertyRef Name="Code_CompAerien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vols_Dep_Calend">
+          <End Role="Calendrier" Type="Self.Calendrier" Multiplicity="1" />
+          <End Role="Vols" Type="Self.Vols" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Calendrier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vols">
+              <PropertyRef Name="Id_Date_Depart" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vols_Depart">
+          <End Role="Aeroport" Type="Self.Aeroport" Multiplicity="1" />
+          <End Role="Vols" Type="Self.Vols" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aeroport">
+              <PropertyRef Name="Code_IATA" />
+            </Principal>
+            <Dependent Role="Vols">
+              <PropertyRef Name="Code_IATA_Aeroport_Depart" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VOLS_NUMER">
+          <End Role="Vols" Type="Self.Vols" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="VolsCedules" Type="Self.VolsCedules" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Vols">
+              <PropertyRef Name="Numero" />
+              <PropertyRef Name="Id_Date_Depart" />
+            </Principal>
+            <Dependent Role="VolsCedules">
+              <PropertyRef Name="Numero_Vol" />
+              <PropertyRef Name="Id_Date_Depart" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="malcom007_aeroportModelStoreContainer">
+          <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Administration" EntityType="Self.Administration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Admins" EntityType="Self.Admins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Aeroport" EntityType="Self.Aeroport" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Calendrier" EntityType="Self.Calendrier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompagniesAeriennes" EntityType="Self.CompagniesAeriennes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Villes" EntityType="Self.Villes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vols" EntityType="Self.Vols" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VolsCedules" EntityType="Self.VolsCedules" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notification" EntityType="Self.Notification" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Notification].[Id] AS [Id], 
+    [Notification].[Num_Phone] AS [Num_Phone], 
+    [Notification].[Num_Vol] AS [Num_Vol], 
+    [Notification].[Statut] AS [Statut]
+    FROM [dbo].[Notification] AS [Notification]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="View_1" EntityType="Self.View_1" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_1].[Id] AS [Id], 
+    [View_1].[Num_Phone] AS [Num_Phone], 
+    [View_1].[Num_Vol] AS [Num_Vol], 
+    [View_1].[Statut] AS [Statut]
+    FROM [dbo].[View_1] AS [View_1]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VOLS_ARRIVES_Today" EntityType="Self.VOLS_ARRIVES_Today" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VOLS_ARRIVES_Today].[NUMERO_VOL] AS [NUMERO_VOL], 
+    [VOLS_ARRIVES_Today].[Etat] AS [Etat], 
+    [VOLS_ARRIVES_Today].[Statut] AS [Statut], 
+    [VOLS_ARRIVES_Today].[PROVENANCE] AS [PROVENANCE], 
+    [VOLS_ARRIVES_Today].[DESTINATION] AS [DESTINATION], 
+    [VOLS_ARRIVES_Today].[COMPAGNIE] AS [COMPAGNIE], 
+    [VOLS_ARRIVES_Today].[DATE_DEPART] AS [DATE_DEPART], 
+    [VOLS_ARRIVES_Today].[DATE_DEP_REVISE] AS [DATE_DEP_REVISE], 
+    [VOLS_ARRIVES_Today].[DATE_ARRIVE] AS [DATE_ARRIVE], 
+    [VOLS_ARRIVES_Today].[DATE_ARR_REVISE] AS [DATE_ARR_REVISE]
+    FROM [dbo].[VOLS_ARRIVES_Today] AS [VOLS_ARRIVES_Today]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VOLS_ARRIVES_Tomorrow" EntityType="Self.VOLS_ARRIVES_Tomorrow" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VOLS_ARRIVES_Tomorrow].[NUMERO_VOL] AS [NUMERO_VOL], 
+    [VOLS_ARRIVES_Tomorrow].[Etat] AS [Etat], 
+    [VOLS_ARRIVES_Tomorrow].[Statut] AS [Statut], 
+    [VOLS_ARRIVES_Tomorrow].[PROVENANCE] AS [PROVENANCE], 
+    [VOLS_ARRIVES_Tomorrow].[DESTINATION] AS [DESTINATION], 
+    [VOLS_ARRIVES_Tomorrow].[COMPAGNIE] AS [COMPAGNIE], 
+    [VOLS_ARRIVES_Tomorrow].[DATE_DEPART] AS [DATE_DEPART], 
+    [VOLS_ARRIVES_Tomorrow].[DATE_DEP_REVISE] AS [DATE_DEP_REVISE], 
+    [VOLS_ARRIVES_Tomorrow].[DATE_ARRIVE] AS [DATE_ARRIVE], 
+    [VOLS_ARRIVES_Tomorrow].[DATE_ARR_REVISE] AS [DATE_ARR_REVISE]
+    FROM [dbo].[VOLS_ARRIVES_Tomorrow] AS [VOLS_ARRIVES_Tomorrow]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VOLS_DEPARTS_Today" EntityType="Self.VOLS_DEPARTS_Today" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VOLS_DEPARTS_Today].[NUMERO_VOL] AS [NUMERO_VOL], 
+    [VOLS_DEPARTS_Today].[Etat] AS [Etat], 
+    [VOLS_DEPARTS_Today].[Statut] AS [Statut], 
+    [VOLS_DEPARTS_Today].[PROVENANCE] AS [PROVENANCE], 
+    [VOLS_DEPARTS_Today].[DESTINATION] AS [DESTINATION], 
+    [VOLS_DEPARTS_Today].[COMPAGNIE] AS [COMPAGNIE], 
+    [VOLS_DEPARTS_Today].[DATE_DEPART] AS [DATE_DEPART], 
+    [VOLS_DEPARTS_Today].[DATE_DEP_REVISE] AS [DATE_DEP_REVISE], 
+    [VOLS_DEPARTS_Today].[DATE_ARRIVE] AS [DATE_ARRIVE], 
+    [VOLS_DEPARTS_Today].[DATE_ARR_REVISE] AS [DATE_ARR_REVISE]
+    FROM [dbo].[VOLS_DEPARTS_Today] AS [VOLS_DEPARTS_Today]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VOLS_DEPARTS_Tomorrow" EntityType="Self.VOLS_DEPARTS_Tomorrow" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VOLS_DEPARTS_Tomorrow].[NUMERO_VOL] AS [NUMERO_VOL], 
+    [VOLS_DEPARTS_Tomorrow].[Etat] AS [Etat], 
+    [VOLS_DEPARTS_Tomorrow].[Statut] AS [Statut], 
+    [VOLS_DEPARTS_Tomorrow].[PROVENANCE] AS [PROVENANCE], 
+    [VOLS_DEPARTS_Tomorrow].[DESTINATION] AS [DESTINATION], 
+    [VOLS_DEPARTS_Tomorrow].[COMPAGNIE] AS [COMPAGNIE], 
+    [VOLS_DEPARTS_Tomorrow].[DATE_DEPART] AS [DATE_DEPART], 
+    [VOLS_DEPARTS_Tomorrow].[DATE_DEP_REVISE] AS [DATE_DEP_REVISE], 
+    [VOLS_DEPARTS_Tomorrow].[DATE_ARRIVE] AS [DATE_ARRIVE], 
+    [VOLS_DEPARTS_Tomorrow].[DATE_ARR_REVISE] AS [DATE_ARR_REVISE]
+    FROM [dbo].[VOLS_DEPARTS_Tomorrow] AS [VOLS_DEPARTS_Tomorrow]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VOLS_RECHERCHES48H" EntityType="Self.VOLS_RECHERCHES48H" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VOLS_RECHERCHES48H].[NUMERO_VOL] AS [NUMERO_VOL], 
+    [VOLS_RECHERCHES48H].[Etat] AS [Etat], 
+    [VOLS_RECHERCHES48H].[Statut] AS [Statut], 
+    [VOLS_RECHERCHES48H].[PROVENANCE] AS [PROVENANCE], 
+    [VOLS_RECHERCHES48H].[DESTINATION] AS [DESTINATION], 
+    [VOLS_RECHERCHES48H].[COMPAGNIE] AS [COMPAGNIE], 
+    [VOLS_RECHERCHES48H].[DATE_DEPART] AS [DATE_DEPART], 
+    [VOLS_RECHERCHES48H].[DATE_DEP_REVISE] AS [DATE_DEP_REVISE], 
+    [VOLS_RECHERCHES48H].[DATE_ARRIVE] AS [DATE_ARRIVE], 
+    [VOLS_RECHERCHES48H].[DATE_ARR_REVISE] AS [DATE_ARR_REVISE]
+    FROM [dbo].[VOLS_RECHERCHES48H] AS [VOLS_RECHERCHES48H]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Administ_Aerop" Association="Self.FK_Administ_Aerop">
+            <End Role="Aeroport" EntitySet="Aeroport" />
+            <End Role="Administration" EntitySet="Administration" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Admins_Adminstrat" Association="Self.FK_Admins_Adminstrat">
+            <End Role="Administration" EntitySet="Administration" />
+            <End Role="Admins" EntitySet="Admins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Aerop_Ville" Association="Self.FK_Aerop_Ville">
+            <End Role="Villes" EntitySet="Villes" />
+            <End Role="Aeroport" EntitySet="Aeroport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vols_Arriv_Calend" Association="Self.FK_Vols_Arriv_Calend">
+            <End Role="Calendrier" EntitySet="Calendrier" />
+            <End Role="Vols" EntitySet="Vols" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vols_Arrivee" Association="Self.FK_Vols_Arrivee">
+            <End Role="Aeroport" EntitySet="Aeroport" />
+            <End Role="Vols" EntitySet="Vols" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vols_CompAerien" Association="Self.FK_Vols_CompAerien">
+            <End Role="CompagniesAeriennes" EntitySet="CompagniesAeriennes" />
+            <End Role="Vols" EntitySet="Vols" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vols_Dep_Calend" Association="Self.FK_Vols_Dep_Calend">
+            <End Role="Calendrier" EntitySet="Calendrier" />
+            <End Role="Vols" EntitySet="Vols" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vols_Depart" Association="Self.FK_Vols_Depart">
+            <End Role="Aeroport" EntitySet="Aeroport" />
+            <End Role="Vols" EntitySet="Vols" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VOLS_NUMER" Association="Self.FK_VOLS_NUMER">
+            <End Role="Vols" EntitySet="Vols" />
+            <End Role="VolsCedules" EntitySet="VolsCedules" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="malcom007_aeroportModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="aeroportEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__RefactorLog" EntityType="malcom007_aeroportModel.C__RefactorLog" />
+          <EntitySet Name="Administrations" EntityType="malcom007_aeroportModel.Administration" />
+          <EntitySet Name="Admins" EntityType="malcom007_aeroportModel.Admin" />
+          <EntitySet Name="Aeroports" EntityType="malcom007_aeroportModel.Aeroport" />
+          <EntitySet Name="Calendriers" EntityType="malcom007_aeroportModel.Calendrier" />
+          <EntitySet Name="CompagniesAeriennes" EntityType="malcom007_aeroportModel.CompagniesAerienne" />
+          <EntitySet Name="Notifications" EntityType="malcom007_aeroportModel.Notification" />
+          <EntitySet Name="sysdiagrams" EntityType="malcom007_aeroportModel.sysdiagram" />
+          <EntitySet Name="Villes" EntityType="malcom007_aeroportModel.Ville" />
+          <EntitySet Name="Vols" EntityType="malcom007_aeroportModel.Vol" />
+          <EntitySet Name="VolsCedules" EntityType="malcom007_aeroportModel.VolsCedule" />
+          <EntitySet Name="Notifications1" EntityType="malcom007_aeroportModel.Notification1" />
+          <EntitySet Name="View_1" EntityType="malcom007_aeroportModel.View_1" />
+          <EntitySet Name="VOLS_ARRIVES_Today" EntityType="malcom007_aeroportModel.VOLS_ARRIVES_Today" />
+          <EntitySet Name="VOLS_ARRIVES_Tomorrow" EntityType="malcom007_aeroportModel.VOLS_ARRIVES_Tomorrow" />
+          <EntitySet Name="VOLS_DEPARTS_Today" EntityType="malcom007_aeroportModel.VOLS_DEPARTS_Today" />
+          <EntitySet Name="VOLS_DEPARTS_Tomorrow" EntityType="malcom007_aeroportModel.VOLS_DEPARTS_Tomorrow" />
+          <EntitySet Name="VOLS_RECHERCHES48H" EntityType="malcom007_aeroportModel.VOLS_RECHERCHES48H" />
+          <AssociationSet Name="FK_Administ_Aerop" Association="malcom007_aeroportModel.FK_Administ_Aerop">
+            <End Role="Aeroport" EntitySet="Aeroports" />
+            <End Role="Administration" EntitySet="Administrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Admins_Adminstrat" Association="malcom007_aeroportModel.FK_Admins_Adminstrat">
+            <End Role="Administration" EntitySet="Administrations" />
+            <End Role="Admin" EntitySet="Admins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Aerop_Ville" Association="malcom007_aeroportModel.FK_Aerop_Ville">
+            <End Role="Ville" EntitySet="Villes" />
+            <End Role="Aeroport" EntitySet="Aeroports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vols_Arrivee" Association="malcom007_aeroportModel.FK_Vols_Arrivee">
+            <End Role="Aeroport" EntitySet="Aeroports" />
+            <End Role="Vol" EntitySet="Vols" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vols_Depart" Association="malcom007_aeroportModel.FK_Vols_Depart">
+            <End Role="Aeroport" EntitySet="Aeroports" />
+            <End Role="Vol" EntitySet="Vols" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vols_Arriv_Calend" Association="malcom007_aeroportModel.FK_Vols_Arriv_Calend">
+            <End Role="Calendrier" EntitySet="Calendriers" />
+            <End Role="Vol" EntitySet="Vols" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vols_Dep_Calend" Association="malcom007_aeroportModel.FK_Vols_Dep_Calend">
+            <End Role="Calendrier" EntitySet="Calendriers" />
+            <End Role="Vol" EntitySet="Vols" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vols_CompAerien" Association="malcom007_aeroportModel.FK_Vols_CompAerien">
+            <End Role="CompagniesAerienne" EntitySet="CompagniesAeriennes" />
+            <End Role="Vol" EntitySet="Vols" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VOLS_NUMER" Association="malcom007_aeroportModel.FK_VOLS_NUMER">
+            <End Role="Vol" EntitySet="Vols" />
+            <End Role="VolsCedule" EntitySet="VolsCedules" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="C__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Administration">
+          <Key>
+            <PropertyRef Name="Code_IATA" />
+          </Key>
+          <Property Name="Code_IATA" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Couleur" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Logo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Aeroport" Relationship="malcom007_aeroportModel.FK_Administ_Aerop" FromRole="Administration" ToRole="Aeroport" />
+          <NavigationProperty Name="Admins" Relationship="malcom007_aeroportModel.FK_Admins_Adminstrat" FromRole="Administration" ToRole="Admin" />
+        </EntityType>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="Id_Admin" />
+          </Key>
+          <Property Name="Id_Admin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NomUtilisateur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MotPasse" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Autorise" Type="Boolean" Nullable="false" />
+          <Property Name="Code_Aeroport" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Administration" Relationship="malcom007_aeroportModel.FK_Admins_Adminstrat" FromRole="Admin" ToRole="Administration" />
+        </EntityType>
+        <EntityType Name="Aeroport">
+          <Key>
+            <PropertyRef Name="Code_IATA" />
+          </Key>
+          <Property Name="Code_IATA" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Code_OACI" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Nom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Id_Ville" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Administration" Relationship="malcom007_aeroportModel.FK_Administ_Aerop" FromRole="Aeroport" ToRole="Administration" />
+          <NavigationProperty Name="Ville" Relationship="malcom007_aeroportModel.FK_Aerop_Ville" FromRole="Aeroport" ToRole="Ville" />
+          <NavigationProperty Name="Vols" Relationship="malcom007_aeroportModel.FK_Vols_Arrivee" FromRole="Aeroport" ToRole="Vol" />
+          <NavigationProperty Name="Vols1" Relationship="malcom007_aeroportModel.FK_Vols_Depart" FromRole="Aeroport" ToRole="Vol" />
+        </EntityType>
+        <EntityType Name="Calendrier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Vols" Relationship="malcom007_aeroportModel.FK_Vols_Arriv_Calend" FromRole="Calendrier" ToRole="Vol" />
+          <NavigationProperty Name="Vols1" Relationship="malcom007_aeroportModel.FK_Vols_Dep_Calend" FromRole="Calendrier" ToRole="Vol" />
+        </EntityType>
+        <EntityType Name="CompagniesAerienne">
+          <Key>
+            <PropertyRef Name="Code_IATA" />
+          </Key>
+          <Property Name="Code_IATA" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Code_OACI" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Nom" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="Logo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Num_Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Vols" Relationship="malcom007_aeroportModel.FK_Vols_CompAerien" FromRole="CompagniesAerienne" ToRole="Vol" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Num_Phone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Num_Vol" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Date_Notification" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Statut" Type="Boolean" Nullable="false" />
+          <Property Name="Langue" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Id_Date_Depart" Type="Int32" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Ville">
+          <Key>
+            <PropertyRef Name="Id_Ville" />
+          </Key>
+          <Property Name="Id_Ville" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Aeroports" Relationship="malcom007_aeroportModel.FK_Aerop_Ville" FromRole="Ville" ToRole="Aeroport" />
+        </EntityType>
+        <EntityType Name="Vol">
+          <Key>
+            <PropertyRef Name="Numero" />
+            <PropertyRef Name="Id_Date_Depart" />
+          </Key>
+          <Property Name="Numero" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Heure_Depart" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Heure_Arrivee" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Id_Date_Depart" Type="Int32" Nullable="false" />
+          <Property Name="Id_Date_Arrivee" Type="Int32" Nullable="false" />
+          <Property Name="Code_CompAerien" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Code_IATA_Aeroport_Depart" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Code_IATA_Aeroport_Arrivee" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Aeroport" Relationship="malcom007_aeroportModel.FK_Vols_Arrivee" FromRole="Vol" ToRole="Aeroport" />
+          <NavigationProperty Name="Aeroport1" Relationship="malcom007_aeroportModel.FK_Vols_Depart" FromRole="Vol" ToRole="Aeroport" />
+          <NavigationProperty Name="Calendrier" Relationship="malcom007_aeroportModel.FK_Vols_Arriv_Calend" FromRole="Vol" ToRole="Calendrier" />
+          <NavigationProperty Name="Calendrier1" Relationship="malcom007_aeroportModel.FK_Vols_Dep_Calend" FromRole="Vol" ToRole="Calendrier" />
+          <NavigationProperty Name="CompagniesAerienne" Relationship="malcom007_aeroportModel.FK_Vols_CompAerien" FromRole="Vol" ToRole="CompagniesAerienne" />
+          <NavigationProperty Name="VolsCedule" Relationship="malcom007_aeroportModel.FK_VOLS_NUMER" FromRole="Vol" ToRole="VolsCedule" />
+        </EntityType>
+        <EntityType Name="VolsCedule">
+          <Key>
+            <PropertyRef Name="Numero_Vol" />
+            <PropertyRef Name="Id_Date_Depart" />
+          </Key>
+          <Property Name="Numero_Vol" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Date_Depart_Revisee" Type="DateTime" Precision="3" />
+          <Property Name="Date_Arrivee_Revisee" Type="DateTime" Precision="3" />
+          <Property Name="Statut" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Etat" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Date_MAJ" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Id_Date_Depart" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Vol" Relationship="malcom007_aeroportModel.FK_VOLS_NUMER" FromRole="VolsCedule" ToRole="Vol" />
+        </EntityType>
+        <EntityType Name="Notification1">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Num_Phone" />
+            <PropertyRef Name="Num_Vol" />
+            <PropertyRef Name="Statut" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Num_Phone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Num_Vol" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Statut" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="View_1">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Num_Phone" />
+            <PropertyRef Name="Num_Vol" />
+            <PropertyRef Name="Statut" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Num_Phone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Num_Vol" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Statut" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VOLS_ARRIVES_Today">
+          <Key>
+            <PropertyRef Name="NUMERO_VOL" />
+            <PropertyRef Name="PROVENANCE" />
+            <PropertyRef Name="DESTINATION" />
+            <PropertyRef Name="COMPAGNIE" />
+          </Key>
+          <Property Name="NUMERO_VOL" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Etat" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Statut" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="PROVENANCE" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="DESTINATION" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="COMPAGNIE" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="DATE_DEPART" Type="DateTime" Precision="3" />
+          <Property Name="DATE_DEP_REVISE" Type="DateTime" Precision="3" />
+          <Property Name="DATE_ARRIVE" Type="DateTime" Precision="3" />
+          <Property Name="DATE_ARR_REVISE" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="VOLS_ARRIVES_Tomorrow">
+          <Key>
+            <PropertyRef Name="NUMERO_VOL" />
+            <PropertyRef Name="PROVENANCE" />
+            <PropertyRef Name="DESTINATION" />
+            <PropertyRef Name="COMPAGNIE" />
+          </Key>
+          <Property Name="NUMERO_VOL" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Etat" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Statut" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="PROVENANCE" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="DESTINATION" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="COMPAGNIE" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="DATE_DEPART" Type="DateTime" Precision="3" />
+          <Property Name="DATE_DEP_REVISE" Type="DateTime" Precision="3" />
+          <Property Name="DATE_ARRIVE" Type="DateTime" Precision="3" />
+          <Property Name="DATE_ARR_REVISE" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="VOLS_DEPARTS_Today">
+          <Key>
+            <PropertyRef Name="NUMERO_VOL" />
+            <PropertyRef Name="PROVENANCE" />
+            <PropertyRef Name="DESTINATION" />
+            <PropertyRef Name="COMPAGNIE" />
+          </Key>
+          <Property Name="NUMERO_VOL" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Etat" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Statut" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="PROVENANCE" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="DESTINATION" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="COMPAGNIE" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="DATE_DEPART" Type="DateTime" Precision="3" />
+          <Property Name="DATE_DEP_REVISE" Type="DateTime" Precision="3" />
+          <Property Name="DATE_ARRIVE" Type="DateTime" Precision="3" />
+          <Property Name="DATE_ARR_REVISE" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="VOLS_DEPARTS_Tomorrow">
+          <Key>
+            <PropertyRef Name="NUMERO_VOL" />
+            <PropertyRef Name="PROVENANCE" />
+            <PropertyRef Name="DESTINATION" />
+            <PropertyRef Name="COMPAGNIE" />
+          </Key>
+          <Property Name="NUMERO_VOL" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Etat" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Statut" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="PROVENANCE" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="DESTINATION" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="COMPAGNIE" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="DATE_DEPART" Type="DateTime" Precision="3" />
+          <Property Name="DATE_DEP_REVISE" Type="DateTime" Precision="3" />
+          <Property Name="DATE_ARRIVE" Type="DateTime" Precision="3" />
+          <Property Name="DATE_ARR_REVISE" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="VOLS_RECHERCHES48H">
+          <Key>
+            <PropertyRef Name="NUMERO_VOL" />
+            <PropertyRef Name="PROVENANCE" />
+            <PropertyRef Name="DESTINATION" />
+            <PropertyRef Name="COMPAGNIE" />
+          </Key>
+          <Property Name="NUMERO_VOL" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Etat" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Statut" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="PROVENANCE" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="DESTINATION" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="COMPAGNIE" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="DATE_DEPART" Type="DateTime" Precision="3" />
+          <Property Name="DATE_DEP_REVISE" Type="DateTime" Precision="3" />
+          <Property Name="DATE_ARRIVE" Type="DateTime" Precision="3" />
+          <Property Name="DATE_ARR_REVISE" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK_Administ_Aerop">
+          <End Type="malcom007_aeroportModel.Aeroport" Role="Aeroport" Multiplicity="1" />
+          <End Type="malcom007_aeroportModel.Administration" Role="Administration" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Aeroport">
+              <PropertyRef Name="Code_IATA" />
+            </Principal>
+            <Dependent Role="Administration">
+              <PropertyRef Name="Code_IATA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Admins_Adminstrat">
+          <End Type="malcom007_aeroportModel.Administration" Role="Administration" Multiplicity="1" />
+          <End Type="malcom007_aeroportModel.Admin" Role="Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Administration">
+              <PropertyRef Name="Code_IATA" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="Code_Aeroport" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Aerop_Ville">
+          <End Type="malcom007_aeroportModel.Ville" Role="Ville" Multiplicity="1" />
+          <End Type="malcom007_aeroportModel.Aeroport" Role="Aeroport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ville">
+              <PropertyRef Name="Id_Ville" />
+            </Principal>
+            <Dependent Role="Aeroport">
+              <PropertyRef Name="Id_Ville" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vols_Arrivee">
+          <End Type="malcom007_aeroportModel.Aeroport" Role="Aeroport" Multiplicity="1" />
+          <End Type="malcom007_aeroportModel.Vol" Role="Vol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aeroport">
+              <PropertyRef Name="Code_IATA" />
+            </Principal>
+            <Dependent Role="Vol">
+              <PropertyRef Name="Code_IATA_Aeroport_Arrivee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vols_Depart">
+          <End Type="malcom007_aeroportModel.Aeroport" Role="Aeroport" Multiplicity="1" />
+          <End Type="malcom007_aeroportModel.Vol" Role="Vol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aeroport">
+              <PropertyRef Name="Code_IATA" />
+            </Principal>
+            <Dependent Role="Vol">
+              <PropertyRef Name="Code_IATA_Aeroport_Depart" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vols_Arriv_Calend">
+          <End Type="malcom007_aeroportModel.Calendrier" Role="Calendrier" Multiplicity="1" />
+          <End Type="malcom007_aeroportModel.Vol" Role="Vol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Calendrier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vol">
+              <PropertyRef Name="Id_Date_Arrivee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vols_Dep_Calend">
+          <End Type="malcom007_aeroportModel.Calendrier" Role="Calendrier" Multiplicity="1" />
+          <End Type="malcom007_aeroportModel.Vol" Role="Vol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Calendrier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vol">
+              <PropertyRef Name="Id_Date_Depart" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vols_CompAerien">
+          <End Type="malcom007_aeroportModel.CompagniesAerienne" Role="CompagniesAerienne" Multiplicity="1" />
+          <End Type="malcom007_aeroportModel.Vol" Role="Vol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompagniesAerienne">
+              <PropertyRef Name="Code_IATA" />
+            </Principal>
+            <Dependent Role="Vol">
+              <PropertyRef Name="Code_CompAerien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VOLS_NUMER">
+          <End Type="malcom007_aeroportModel.Vol" Role="Vol" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="malcom007_aeroportModel.VolsCedule" Role="VolsCedule" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Vol">
+              <PropertyRef Name="Numero" />
+              <PropertyRef Name="Id_Date_Depart" />
+            </Principal>
+            <Dependent Role="VolsCedule">
+              <PropertyRef Name="Numero_Vol" />
+              <PropertyRef Name="Id_Date_Depart" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="malcom007_aeroportModelStoreContainer" CdmEntityContainer="aeroportEntities">
+          <EntitySetMapping Name="C__RefactorLog">
+            <EntityTypeMapping TypeName="malcom007_aeroportModel.C__RefactorLog">
+              <MappingFragment StoreEntitySet="__RefactorLog">
+                <ScalarProperty Name="OperationKey" ColumnName="OperationKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Administrations">
+            <EntityTypeMapping TypeName="malcom007_aeroportModel.Administration">
+              <MappingFragment StoreEntitySet="Administration">
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="Couleur" ColumnName="Couleur" />
+                <ScalarProperty Name="Code_IATA" ColumnName="Code_IATA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="malcom007_aeroportModel.Admin">
+              <MappingFragment StoreEntitySet="Admins">
+                <ScalarProperty Name="Code_Aeroport" ColumnName="Code_Aeroport" />
+                <ScalarProperty Name="Autorise" ColumnName="Autorise" />
+                <ScalarProperty Name="MotPasse" ColumnName="MotPasse" />
+                <ScalarProperty Name="NomUtilisateur" ColumnName="NomUtilisateur" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Id_Admin" ColumnName="Id_Admin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Aeroports">
+            <EntityTypeMapping TypeName="malcom007_aeroportModel.Aeroport">
+              <MappingFragment StoreEntitySet="Aeroport">
+                <ScalarProperty Name="Id_Ville" ColumnName="Id_Ville" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Code_OACI" ColumnName="Code_OACI" />
+                <ScalarProperty Name="Code_IATA" ColumnName="Code_IATA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Calendriers">
+            <EntityTypeMapping TypeName="malcom007_aeroportModel.Calendrier">
+              <MappingFragment StoreEntitySet="Calendrier">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompagniesAeriennes">
+            <EntityTypeMapping TypeName="malcom007_aeroportModel.CompagniesAerienne">
+              <MappingFragment StoreEntitySet="CompagniesAeriennes">
+                <ScalarProperty Name="Num_Phone" ColumnName="Num_Phone" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Code_OACI" ColumnName="Code_OACI" />
+                <ScalarProperty Name="Code_IATA" ColumnName="Code_IATA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="malcom007_aeroportModel.Notification">
+              <MappingFragment StoreEntitySet="Notifications">
+                <ScalarProperty Name="Id_Date_Depart" ColumnName="Id_Date_Depart" />
+                <ScalarProperty Name="Langue" ColumnName="Langue" />
+                <ScalarProperty Name="Statut" ColumnName="Statut" />
+                <ScalarProperty Name="Date_Notification" ColumnName="Date_Notification" />
+                <ScalarProperty Name="Num_Vol" ColumnName="Num_Vol" />
+                <ScalarProperty Name="Num_Phone" ColumnName="Num_Phone" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="malcom007_aeroportModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Villes">
+            <EntityTypeMapping TypeName="malcom007_aeroportModel.Ville">
+              <MappingFragment StoreEntitySet="Villes">
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Id_Ville" ColumnName="Id_Ville" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vols">
+            <EntityTypeMapping TypeName="malcom007_aeroportModel.Vol">
+              <MappingFragment StoreEntitySet="Vols">
+                <ScalarProperty Name="Code_IATA_Aeroport_Arrivee" ColumnName="Code_IATA_Aeroport_Arrivee" />
+                <ScalarProperty Name="Code_IATA_Aeroport_Depart" ColumnName="Code_IATA_Aeroport_Depart" />
+                <ScalarProperty Name="Code_CompAerien" ColumnName="Code_CompAerien" />
+                <ScalarProperty Name="Id_Date_Arrivee" ColumnName="Id_Date_Arrivee" />
+                <ScalarProperty Name="Id_Date_Depart" ColumnName="Id_Date_Depart" />
+                <ScalarProperty Name="Heure_Arrivee" ColumnName="Heure_Arrivee" />
+                <ScalarProperty Name="Heure_Depart" ColumnName="Heure_Depart" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VolsCedules">
+            <EntityTypeMapping TypeName="malcom007_aeroportModel.VolsCedule">
+              <MappingFragment StoreEntitySet="VolsCedules">
+                <ScalarProperty Name="Id_Date_Depart" ColumnName="Id_Date_Depart" />
+                <ScalarProperty Name="Date_MAJ" ColumnName="Date_MAJ" />
+                <ScalarProperty Name="Etat" ColumnName="Etat" />
+                <ScalarProperty Name="Statut" ColumnName="Statut" />
+                <ScalarProperty Name="Date_Arrivee_Revisee" ColumnName="Date_Arrivee_Revisee" />
+                <ScalarProperty Name="Date_Depart_Revisee" ColumnName="Date_Depart_Revisee" />
+                <ScalarProperty Name="Numero_Vol" ColumnName="Numero_Vol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notifications1">
+            <EntityTypeMapping TypeName="malcom007_aeroportModel.Notification1">
+              <MappingFragment StoreEntitySet="Notification">
+                <ScalarProperty Name="Statut" ColumnName="Statut" />
+                <ScalarProperty Name="Num_Vol" ColumnName="Num_Vol" />
+                <ScalarProperty Name="Num_Phone" ColumnName="Num_Phone" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_1">
+            <EntityTypeMapping TypeName="malcom007_aeroportModel.View_1">
+              <MappingFragment StoreEntitySet="View_1">
+                <ScalarProperty Name="Statut" ColumnName="Statut" />
+                <ScalarProperty Name="Num_Vol" ColumnName="Num_Vol" />
+                <ScalarProperty Name="Num_Phone" ColumnName="Num_Phone" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VOLS_ARRIVES_Today">
+            <EntityTypeMapping TypeName="malcom007_aeroportModel.VOLS_ARRIVES_Today">
+              <MappingFragment StoreEntitySet="VOLS_ARRIVES_Today">
+                <ScalarProperty Name="DATE_ARR_REVISE" ColumnName="DATE_ARR_REVISE" />
+                <ScalarProperty Name="DATE_ARRIVE" ColumnName="DATE_ARRIVE" />
+                <ScalarProperty Name="DATE_DEP_REVISE" ColumnName="DATE_DEP_REVISE" />
+                <ScalarProperty Name="DATE_DEPART" ColumnName="DATE_DEPART" />
+                <ScalarProperty Name="COMPAGNIE" ColumnName="COMPAGNIE" />
+                <ScalarProperty Name="DESTINATION" ColumnName="DESTINATION" />
+                <ScalarProperty Name="PROVENANCE" ColumnName="PROVENANCE" />
+                <ScalarProperty Name="Statut" ColumnName="Statut" />
+                <ScalarProperty Name="Etat" ColumnName="Etat" />
+                <ScalarProperty Name="NUMERO_VOL" ColumnName="NUMERO_VOL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VOLS_ARRIVES_Tomorrow">
+            <EntityTypeMapping TypeName="malcom007_aeroportModel.VOLS_ARRIVES_Tomorrow">
+              <MappingFragment StoreEntitySet="VOLS_ARRIVES_Tomorrow">
+                <ScalarProperty Name="DATE_ARR_REVISE" ColumnName="DATE_ARR_REVISE" />
+                <ScalarProperty Name="DATE_ARRIVE" ColumnName="DATE_ARRIVE" />
+                <ScalarProperty Name="DATE_DEP_REVISE" ColumnName="DATE_DEP_REVISE" />
+                <ScalarProperty Name="DATE_DEPART" ColumnName="DATE_DEPART" />
+                <ScalarProperty Name="COMPAGNIE" ColumnName="COMPAGNIE" />
+                <ScalarProperty Name="DESTINATION" ColumnName="DESTINATION" />
+                <ScalarProperty Name="PROVENANCE" ColumnName="PROVENANCE" />
+                <ScalarProperty Name="Statut" ColumnName="Statut" />
+                <ScalarProperty Name="Etat" ColumnName="Etat" />
+                <ScalarProperty Name="NUMERO_VOL" ColumnName="NUMERO_VOL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VOLS_DEPARTS_Today">
+            <EntityTypeMapping TypeName="malcom007_aeroportModel.VOLS_DEPARTS_Today">
+              <MappingFragment StoreEntitySet="VOLS_DEPARTS_Today">
+                <ScalarProperty Name="DATE_ARR_REVISE" ColumnName="DATE_ARR_REVISE" />
+                <ScalarProperty Name="DATE_ARRIVE" ColumnName="DATE_ARRIVE" />
+                <ScalarProperty Name="DATE_DEP_REVISE" ColumnName="DATE_DEP_REVISE" />
+                <ScalarProperty Name="DATE_DEPART" ColumnName="DATE_DEPART" />
+                <ScalarProperty Name="COMPAGNIE" ColumnName="COMPAGNIE" />
+                <ScalarProperty Name="DESTINATION" ColumnName="DESTINATION" />
+                <ScalarProperty Name="PROVENANCE" ColumnName="PROVENANCE" />
+                <ScalarProperty Name="Statut" ColumnName="Statut" />
+                <ScalarProperty Name="Etat" ColumnName="Etat" />
+                <ScalarProperty Name="NUMERO_VOL" ColumnName="NUMERO_VOL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VOLS_DEPARTS_Tomorrow">
+            <EntityTypeMapping TypeName="malcom007_aeroportModel.VOLS_DEPARTS_Tomorrow">
+              <MappingFragment StoreEntitySet="VOLS_DEPARTS_Tomorrow">
+                <ScalarProperty Name="DATE_ARR_REVISE" ColumnName="DATE_ARR_REVISE" />
+                <ScalarProperty Name="DATE_ARRIVE" ColumnName="DATE_ARRIVE" />
+                <ScalarProperty Name="DATE_DEP_REVISE" ColumnName="DATE_DEP_REVISE" />
+                <ScalarProperty Name="DATE_DEPART" ColumnName="DATE_DEPART" />
+                <ScalarProperty Name="COMPAGNIE" ColumnName="COMPAGNIE" />
+                <ScalarProperty Name="DESTINATION" ColumnName="DESTINATION" />
+                <ScalarProperty Name="PROVENANCE" ColumnName="PROVENANCE" />
+                <ScalarProperty Name="Statut" ColumnName="Statut" />
+                <ScalarProperty Name="Etat" ColumnName="Etat" />
+                <ScalarProperty Name="NUMERO_VOL" ColumnName="NUMERO_VOL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VOLS_RECHERCHES48H">
+            <EntityTypeMapping TypeName="malcom007_aeroportModel.VOLS_RECHERCHES48H">
+              <MappingFragment StoreEntitySet="VOLS_RECHERCHES48H">
+                <ScalarProperty Name="DATE_ARR_REVISE" ColumnName="DATE_ARR_REVISE" />
+                <ScalarProperty Name="DATE_ARRIVE" ColumnName="DATE_ARRIVE" />
+                <ScalarProperty Name="DATE_DEP_REVISE" ColumnName="DATE_DEP_REVISE" />
+                <ScalarProperty Name="DATE_DEPART" ColumnName="DATE_DEPART" />
+                <ScalarProperty Name="COMPAGNIE" ColumnName="COMPAGNIE" />
+                <ScalarProperty Name="DESTINATION" ColumnName="DESTINATION" />
+                <ScalarProperty Name="PROVENANCE" ColumnName="PROVENANCE" />
+                <ScalarProperty Name="Statut" ColumnName="Statut" />
+                <ScalarProperty Name="Etat" ColumnName="Etat" />
+                <ScalarProperty Name="NUMERO_VOL" ColumnName="NUMERO_VOL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,37 @@
+﻿@* On va utiliser une grille *@
+@using GridMvc.Html
+
+<link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet" />
+<link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "Index";
+}
+@{
+    Layout = null;
+}
+
+
+@model IEnumerable<DAL.Vol>
+
+
+
+<h2>Index</h2>
+
+@* On met la collection ville se trouvant ds notre model de la Vue *@
+<div class="code-cut">
+    @Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(v => v.Numero).Titled("ID Ville");
+    columns.Add(v => v.Code_CompAerien).Titled("Nom Ville").Sortable(true);
+    columns.Add()
+            .Sanitized(false)
+            .Encoded(false)
+            .RenderValueAs(v => Html.ActionLink("Éditer", "Edit", new { id = v.Numero }));
+}).WithPaging(10).Sortable(true)
+</div>
+
+
+<script src="~/Scripts/gridmvc.min.js"></script>
+
+

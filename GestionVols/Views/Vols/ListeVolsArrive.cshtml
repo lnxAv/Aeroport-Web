@@ -1,0 +1,152 @@
+﻿@using System.Collections.Generic;
+@using GestionVols.Models
+
+@{
+    ViewBag.Title = "ListeVolsArrive";
+}
+
+@using GridMvc.Html
+
+@model GestionVols.Models.Recherche
+
+
+    <div class="container mb-5">
+
+        <div class="row">
+            <div class="col">
+                <h2 class="title">Liste des vols arrivées</h2>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+<div class="followFlight container-fluid p-2 pt-4 mb-4">
+    <div class="container">
+
+
+
+
+        @using (Html.BeginForm(actionName: "Rechercher", controllerName: "Vols", method: FormMethod.Get, htmlAttributes: new { @class = "form-horizontal" }))
+        {
+
+
+            <div class="form-group form-inline">
+                <label class="col-md-2 control-label text-left">Rechercher un vol: </label>
+
+                @Html.TextBoxFor(model => model.VALEUR, "Rechercher", new { @class = "form-control mr-3", placeholder = Html.DisplayName("Saisissez un mot..."), required = "required" })
+
+                @Html.DropDownListFor(m => m.OPTION,
+                                    new SelectList(Enum.GetValues(typeof(Option))), "Rechercher par ...", new { @class = "form-control mr-3", required = "required" })
+
+                <div class=" ">
+                    Départ
+                    @Html.RadioButtonFor(m => m.TYPE_VOL, "Départ", new { @checked = "checked", required = "required" })
+                    Arrivé
+                    @Html.RadioButtonFor(m => m.TYPE_VOL, "Arrivé")
+                </div>
+
+
+                <input type="submit" class="btn btn-primary ml-md-3" value="Rechercher" />
+
+            </div>
+        }
+    </div>
+</div>
+
+
+@*Formulaire de recherche de vols*@
+<div class="container mb-4">
+
+
+    @* N *@
+    @Html.Hidden("RedirectTo", Url.Action("ListeVolsArrive", "Vols", new { cible = "__cible__" }))
+
+    <select id="selectpicker" class="form-control" onchange="day()">
+        <option selected>Sélectionner une journée</option>
+        <option>Aujourd'hui</option>
+        <option>Demain</option>
+
+    </select>
+
+</div>
+
+
+@* Liste Vols Arrivés *@
+<div class="container mt-5">
+
+    <div class="row">
+
+        <div class="col">
+
+            <h3>Vols Arrivéss</h3>
+
+            <div class="grid-mvc" data-lang="en" data-gridname="" data-selectable="true" data-multiplefilters="false">
+                <div class="grid-wrap">
+                    <table class="table table-striped grid-table">
+
+                        <thead>
+                            <tr>
+                                <th class="grid-header" style="width:10%;">
+                                    <div class="sorted-asc sorted grid-header-title"><a href="?grid-column=HEUREPREVUE&amp;grid-dir=1">Heure Prévue</a></div>
+                                </th>
+                                <th class="grid-header">
+                                    <div class="grid-header-title"><a href="?grid-column=HEUREREVISE&amp;grid-dir=0">Heure Révisé</a></div>
+                                </th>
+                                <th class="grid-header">
+                                    <div class="grid-header-title"><a href="?grid-column=NUMERO&amp;grid-dir=0">Num Vol</a></div>
+                                </th>
+                                <th class="grid-header">
+                                    <div class="grid-header-title"><a href="?grid-column=DESTINATION&amp;grid-dir=0">Provenance</a></div>
+                                </th>
+                                <th class="grid-header">
+                                    <div class="grid-header-title"><a href="?grid-column=COMPAGNIE&amp;grid-dir=0">Compagnie aérienne</a></div>
+                                </th>
+                                <th class="grid-header">
+                                    <div class="grid-header-title"><a href="?grid-column=STATUT&amp;grid-dir=0">Statut</a></div>
+                                </th>
+                                <th class="grid-header">
+                                    <div class="grid-header-title"><span>Suivre</span></div>
+                                </th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+
+
+                            @foreach (var item in ViewBag.VolsArrives)
+                            {
+                                <tr>
+
+                                    <td class="grid-cell" data-name="HEUREPREVUE">@item.HEUREPREVUE</td>
+                                    <td class="grid-cell" data-name="HEUREREVISE">@item.HEUREREVISE</td>
+                                    <td class="grid-cell" data-name="NUMERO">@item.NUMERO</td>
+                                    <td class="grid-cell" data-name="PROVENANCE">@item.PROVENANCE</td>
+                                    <td class="grid-cell" data-name="COMPAGNIE">@item.COMPAGNIE</td>
+                                    <td class="grid-cell" data-name="STATUT">@item.STATUT</td>
+                                    <td class="grid-cell" data-name="">@Html.ActionLink("Suivre", "Index", "inscription", new { id = @item.NUMERO }, null)</td>
+
+
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                    <div class="grid-footer">
+
+                    </div>
+
+                </div>
+            </div>
+            .
+        </div>
+
+    </div>
+
+</div>
+
+

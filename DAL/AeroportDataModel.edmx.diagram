@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="160314ec9d954fbabf138e3e00367c7e" Name="Diagram1" ZoomLevel="67">
+        <EntityTypeShape EntityType="malcom007_aeroportModel.C__RefactorLog" Width="1.5" PointX="2.75" PointY="5.75" />
+        <EntityTypeShape EntityType="malcom007_aeroportModel.Administration" Width="1.5" PointX="3" PointY="9" />
+        <EntityTypeShape EntityType="malcom007_aeroportModel.Admin" Width="1.5" PointX="5.25" PointY="8.75" />
+        <EntityTypeShape EntityType="malcom007_aeroportModel.Aeroport" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="malcom007_aeroportModel.Calendrier" Width="1.5" PointX="0.75" PointY="2" />
+        <EntityTypeShape EntityType="malcom007_aeroportModel.CompagniesAerienne" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="malcom007_aeroportModel.Notification" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="malcom007_aeroportModel.sysdiagram" Width="1.5" PointX="4.75" PointY="5.75" />
+        <EntityTypeShape EntityType="malcom007_aeroportModel.Ville" Width="1.5" PointX="1.5" PointY="12.25" />
+        <EntityTypeShape EntityType="malcom007_aeroportModel.Vol" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="malcom007_aeroportModel.VolsCedule" Width="1.5" PointX="5.25" PointY="1.625" />
+        <EntityTypeShape EntityType="malcom007_aeroportModel.Notification1" Width="1.5" PointX="6.75" PointY="5.75" />
+        <EntityTypeShape EntityType="malcom007_aeroportModel.View_1" Width="1.5" PointX="8.75" PointY="4.75" />
+        <EntityTypeShape EntityType="malcom007_aeroportModel.VOLS_ARRIVES_Today" Width="1.5" PointX="8.75" PointY="7.75" />
+        <EntityTypeShape EntityType="malcom007_aeroportModel.VOLS_ARRIVES_Tomorrow" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="malcom007_aeroportModel.VOLS_DEPARTS_Today" Width="1.5" PointX="10.75" PointY="4.75" />
+        <EntityTypeShape EntityType="malcom007_aeroportModel.VOLS_DEPARTS_Tomorrow" Width="1.5" PointX="10.75" PointY="8.75" />
+        <EntityTypeShape EntityType="malcom007_aeroportModel.VOLS_RECHERCHES48H" Width="1.5" PointX="11.75" PointY="0.75" />
+        <AssociationConnector Association="malcom007_aeroportModel.FK_Administ_Aerop" />
+        <AssociationConnector Association="malcom007_aeroportModel.FK_Admins_Adminstrat" />
+        <AssociationConnector Association="malcom007_aeroportModel.FK_Aerop_Ville" />
+        <AssociationConnector Association="malcom007_aeroportModel.FK_Vols_Arrivee" />
+        <AssociationConnector Association="malcom007_aeroportModel.FK_Vols_Depart" />
+        <AssociationConnector Association="malcom007_aeroportModel.FK_Vols_Arriv_Calend" />
+        <AssociationConnector Association="malcom007_aeroportModel.FK_Vols_Dep_Calend" />
+        <AssociationConnector Association="malcom007_aeroportModel.FK_Vols_CompAerien" />
+        <AssociationConnector Association="malcom007_aeroportModel.FK_VOLS_NUMER" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

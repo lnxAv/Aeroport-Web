@@ -1,0 +1,148 @@
+#bigHeaderImage{
+    height: 10%;
+    width: 100%;
+}
+
+#inscriptionText{
+    font-size: 100%;
+    text-align: center;
+}
+
+.thinContainer {
+    margin: 0% 5% 0%;
+}
+
+#notificationGrid {
+    display: grid;
+    grid-column-gap: 10px;
+    align-content: start;
+    text-align: left;
+}
+
+#notificationForm{
+    grid-column:1;
+    grid-row:1;
+}
+
+#notificationForm-Info {
+    padding: 2%;
+    text-align: center;
+    border-radius: 15px;
+    border: solid;
+    font-size: 130%;
+    color: white;
+    background-color: rgb(50, 60, 80);
+    grid-column: 2;
+    grid-row: 1;
+}
+
+@media only screen and (max-width: 993px) {
+    #notificationForm-Info {
+        border-color:white;
+        background-color: white;
+        color: rgb(50, 60, 80);
+    }
+
+    #notificationForm-Info-message {
+        text-align:left;
+        font-size: 90%;
+    }
+
+    #notificationForm-Info-img{
+       height:  30%;
+    }
+}
+
+@media only screen and (max-width: 766px) {
+    #notificationForm-Info {
+        display: none;
+    }
+    #notificationForm-Info-message {
+        display: none;
+    }
+}
+
+    #inputGrid {
+        display: grid;
+        text-align: left;
+        grid-row-gap: 10px;
+        grid-column-gap: 10px;
+        grid-template-columns: 100px 80px 150px 100px;
+    }
+
+    #input-PhoneItem-digits {
+        grid-column: 1/4;
+        grid-row: 1;
+    }
+
+    #input-FlightItem {
+        grid-column: 1/3;
+        grid-row: 2;
+    }
+
+    #input-LanguageItem {
+        grid-column: 3;
+        grid-row: 2;
+    }
+
+    #input-ButtonItem {
+        grid-column: 4;
+        grid-row: 2;
+    }
+
+    #input-TermsItem {
+        grid-column: 1/3;
+        grid-row: 3;
+    }
+
+    .thinHeader {
+        height: 50px;
+    }
+
+    #containerSeparator {
+        height: 3px;
+        background: rgb(50, 60, 80);
+    }
+
+    @media only screen and (max-width: 650px) {
+        .infoHide {
+            display: none;
+        }
+    }
+
+    #tuilioInfo {
+        margin-top: 2%;
+        text-align: center;
+        background-color: rgb(50, 60, 80);
+        color: white;
+    }
+
+    #tulioInfo-inner {
+        padding: 2%;
+    }
+
+    .infoSupp {
+        padding-left: 20%;
+        height: 400px;
+        color: rgb(50, 60, 80);
+    }
+
+    .infoSupp-inner {
+        padding: 2%;
+        display: inline-grid;
+    }
+
+    #infoImg {
+        height: 400px;
+    }
+
+    #infoItem1 {
+        grid-row: 1/3;
+        grid-column: 1;
+    }
+
+    #infoItem2 {
+        text-align: left;
+        grid-row: 1;
+        grid-column: 2;
+    }

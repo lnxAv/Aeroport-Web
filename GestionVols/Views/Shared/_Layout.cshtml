@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title Aeroport de Montreal</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/AcceuilIndexPage.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/indexInscription.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    <script src="~/Scripts/src/activeMenu.js"></script>
+    <script src="~/Scripts/src/selectionJour.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script>
+        window.onload = function () {
+            //On recuper le parent de notre div
+            var monheader = document.getElementById("menu");
+            //On recupere une liste d'element ayant la btn se trouvant ds le parent header
+            var btns = monheader.querySelectorAll("a");
+
+            //on ajouter un écouteur de type click sur chaque btn en utilisant la boucle for et ainsi que son indice
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].addEventListener("click", function () {
+                    //on recupere l'element ayant ayant la classe Active
+                    var current = document.getElementsByClassName("active");
+                    console()
+                    // on remplace cette classe en enlevant active
+                    current[0].className = current[0].className.replace("active", " ");
+                    //et l'objet courrant sur lequel on a cliqué, on ajoute active
+                    this.className = "active";
+                });
+            }
+        }
+    </script>
+</head>
+<body>
+
+
+
+    @* Menu *@
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light ">
+            <div class="container pl-md-0">
+                <div class="navbar-header mr-md-5">
+                    <a href="@Url.Action("Index", "Home")" class="navbar-brand">
+                        <img src="~/Content/img/Aéroports_de_Montréal_(logo).png" alt="Logo" style="width: 200px;"/>
+                    </a>
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse " id="menu">
+                    <ul class="navbar-nav mr-auto">
+
+                        <li class="nav-item mr-4 ml-md-5 text-muted">@Html.ActionLink("Accueil", "Index", "Home")</li>
+                        <li class="nav-item mr-4 text-muted">@Html.ActionLink("Départs", "ListeVolsDepart", "Vols") </li>
+                        <li class="nav-item mr-4 text-muted">@Html.ActionLink("Arrivés", "ListeVolsArrive", "Vols") </li>
+                        <li class="nav-item mr-4 text-muted">@Html.ActionLink("Tous les Vols", "Index", "Vols") </li>
+                        <li class="nav-item text-muted">@Html.ActionLink("Suivre vol", "Index", "Inscription") </li>
+
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    </div>
+
+
+    @* Body *@
+    <div class=" mt-3">
+        @RenderBody()
+
+    </div>
+
+    @* Footer *@
+    <div class="container-fluid bg-light">
+        <div class="container ">
+            <footer class="mt-4">
+                <div class="container pt-3">
+                    <div class="row">
+                        <div class="col col-md pl-md-0">
+                            <a href="@Url.Action("Index","Home")">
+                                <img src="~/Content/img/Aéroports_de_Montréal_(logo).png" alt="Logo" style="width: 200px;" />
+                            </a>
+
+                        </div>
+                        <div class="col-md">
+                            <h5>Préparer votre Déplacement</h5>
+                            <ul class="list-unstyled text-small">
+                                <li class="text-muted">@Html.ActionLink("Départ", "ListeVolsDepart", "Vols")</li>
+                                <li class="text-muted">@Html.ActionLink("Arrivé", "ListeVolsArrive", "Vols")</li>
+                                <li class="text-muted">@Html.ActionLink("Tous les Vols", "Index", "Vols")</li>
+
+                            </ul>
+                        </div>
+                        <div class="col-md">
+                            <h5>Aéroport</h5>
+                            <ul class="list-unstyled text-small">
+                                <li><a class="text-muted" href="#">À propos</a></li>
+                                <li><a class="text-muted" href="#">Services à l'aéroport</a></li>
+                                <li><a class="text-muted" href="#">Restaurant & Bar</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container mt-4">
+                    <div class="row">
+                        <div class="col pl-md-0"><p>&copy; @DateTime.Now.Year - Aeroport de Montreal </p></div>
+                    </div>
+
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <script>
+     $('.navbar-nav .nav-link').click(function(){
+        $('.navbar-nav .nav-link').removeClass('active');
+        $(this).addClass('active');
+      })
+    </script>
+</body>
+</html>
